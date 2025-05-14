@@ -6,9 +6,27 @@ export class InMemoryAdministratorsRepository
 {
   public items: Administrator[] = [];
 
-  async create(administrator: Administrator): Promise<Administrator> {
+  async create(administrator: Administrator) {
     this.items.push(administrator);
 
     return administrator;
+  }
+  async findById(id: string) {
+    const administrator = this.items.find((item) => item.id.toString() === id);
+
+    if (!administrator) {
+      return null;
+    }
+
+    return administrator;
+  }
+  async delete(administratorId: string) {
+    const administratorIndex = this.items.findIndex(
+      (item) => item.id.toString() === administratorId
+    );
+
+    if (administratorIndex !== -1) {
+      this.items.splice(administratorIndex, 1);
+    }
   }
 }
