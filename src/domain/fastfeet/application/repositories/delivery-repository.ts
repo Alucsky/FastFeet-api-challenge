@@ -1,4 +1,4 @@
-import { Delivery } from "../../enterprise/entities/Delivery";
+import { Delivery } from "../../enterprise/entities/delivery";
 
 export interface DeliveryRepository {
   // findById(id: string): Promise<Delivery>;
