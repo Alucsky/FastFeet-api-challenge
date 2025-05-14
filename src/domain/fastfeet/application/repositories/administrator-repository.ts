@@ -1,4 +1,4 @@
-import { Administrator } from "../../enterprise/entities/Administrator";
+import { Administrator } from "../../enterprise/entities/administrator";
 
 export interface AdministratorRepository {
   // findById(id: string): Promise<Administrator>;
