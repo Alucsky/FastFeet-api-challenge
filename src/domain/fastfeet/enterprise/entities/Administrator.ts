@@ -1,4 +1,5 @@
 import { Entity } from "@/core/entities/entity";
+import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 
 export interface AdministratorProps {
   name: string;
@@ -19,7 +20,7 @@ export class Administrator extends Entity<AdministratorProps> {
     return this.props.password;
   }
 
-  static create(props: AdministratorProps) {
-    return new Administrator(props);
+  static create(props: AdministratorProps, id?: UniqueEntityID) {
+    return new Administrator(props, id);
   }
 }
