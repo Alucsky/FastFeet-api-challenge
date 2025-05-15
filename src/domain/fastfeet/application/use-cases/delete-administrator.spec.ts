@@ -5,13 +5,13 @@ import { makeAdministrator } from "test/factories/make-administrator";
 let inMemoryAdministratorRepository: InMemoryAdministratorsRepository;
 let sut: DeleteAdministratorUseCase;
 
-describe("Create Administrator", () => {
+describe("Delete Administrator", () => {
   beforeEach(() => {
     inMemoryAdministratorRepository = new InMemoryAdministratorsRepository();
     sut = new DeleteAdministratorUseCase(inMemoryAdministratorRepository);
   });
 
-  it("should be able to create a administrator", async () => {
+  it("should be able to delete a administrator", async () => {
     const administrator = makeAdministrator({
       password: "123456",
     });
