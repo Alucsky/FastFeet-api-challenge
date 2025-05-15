@@ -1,4 +1,3 @@
-import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 import { RecipientRepository } from "@/domain/fastfeet/application/repositories/recipient-repository";
 import { Recipient } from "@/domain/fastfeet/enterprise/entities/recipient";
 
@@ -19,5 +18,14 @@ export class InMemoryRecipientRepository implements RecipientRepository {
     }
 
     return recipient;
+  }
+  async delete(recipientId: string) {
+    const recipientIndex = this.items.findIndex(
+      (item) => item.id.toString() === recipientId
+    );
+
+    if (recipientIndex !== -1) {
+      this.items.splice(recipientIndex, 1);
+    }
   }
 }
