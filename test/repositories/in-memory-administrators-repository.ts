@@ -29,4 +29,22 @@ export class InMemoryAdministratorsRepository
       this.items.splice(administratorIndex, 1);
     }
   }
+  async update(administrator: Administrator) {
+    const administratorIndex = this.items.findIndex(
+      (item) => item.id.toString() === administrator.id.toString()
+    );
+
+    if (administratorIndex !== -1) {
+      this.items[administratorIndex] = administrator;
+    }
+
+    return administrator;
+  }
+  async findByCpf(cpf: string) {
+    const administrator = this.items.find((item) => item.cpf === cpf);
+    if (!administrator) {
+      return null;
+    }
+    return administrator;
+  }
 }
