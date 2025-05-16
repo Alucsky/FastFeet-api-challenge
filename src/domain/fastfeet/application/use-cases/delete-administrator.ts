@@ -1,5 +1,4 @@
 import { Either, left, right } from "@/core/either";
-import { Administrator } from "../../enterprise/entities/administrator";
 import { AdministratorRepository } from "../repositories/administrator-repository";
 import { ResourceNotFoundError } from "@/core/errors/errors/resource-not-found-error";
 
