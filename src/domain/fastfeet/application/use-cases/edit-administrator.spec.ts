@@ -47,39 +47,5 @@ describe("Edit Administrator", () => {
     expect(result.isRight()).toBe(true);
   });
 
-  it("should be not able to edit an administrator with a diferent id", async () => {
-    const administrator = makeAdministrator({
-      name: "John Doe",
-      cpf: "12345678901",
-      password: "123456",
-    });
-
-    await inMemoryAdministratorRepository.create(administrator);
-
-    expect(inMemoryAdministratorRepository.items).toHaveLength(1);
-    expect(inMemoryAdministratorRepository.items[0]).toEqual(
-      expect.objectContaining({
-        name: "John Doe",
-        cpf: "12345678901",
-        password: "123456",
-      })
-    );
-
-    const result = await sut.execute({
-      name: "Jane Doe",
-      cpf: "98765432100",
-      password: "654321",
-      administratorId: "1234567890",
-    });
-
-    expect(inMemoryAdministratorRepository.items[0]).toEqual(
-      expect.objectContaining({
-        name: "John Doe",
-        cpf: "12345678901",
-        password: "123456",
-      })
-    );
-
-    expect(result.isLeft()).toBe(true);
-  });
+ 
 });

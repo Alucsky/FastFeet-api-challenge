@@ -28,4 +28,13 @@ export class InMemoryRecipientRepository implements RecipientRepository {
       this.items.splice(recipientIndex, 1);
     }
   }
+  async update(recipient: Recipient) {
+    const recipientIndex = this.items.findIndex(
+      (item) => item.id.toString() === recipient.id.toString()
+    );
+    if (recipientIndex !== -1) {
+      this.items[recipientIndex] = recipient;
+    }
+    return recipient;
+  }
 }

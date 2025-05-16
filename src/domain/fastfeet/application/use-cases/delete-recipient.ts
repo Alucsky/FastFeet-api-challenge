@@ -1,7 +1,6 @@
 import { Either, left, right } from "@/core/either";
 import { ResourceNotFoundError } from "@/core/errors/errors/resource-not-found-error";
 import { RecipientRepository } from "../repositories/recipient-repository";
-import { AdministratorRepository } from "../repositories/administrator-repository";
 
 interface DeleterecipientUseCaseRequest {
   recipientId: string;
