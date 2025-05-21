@@ -1,7 +1,7 @@
 import { User } from "@/domain/fastfeet/enterprise/entities/user";
 
 export class InMemoryUsersRepository {
-  private items: User[] = [];
+  public items: User[] = [];
 
   async create(user: User): Promise<User> {
     this.items.push(user);

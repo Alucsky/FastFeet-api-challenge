@@ -33,7 +33,8 @@ export class CreateDeliverymanUseCase {
     await this.usersRepository.create(user);
 
     const deliveryman = Deliveryman.create({
-      userId: user.id.toString(),
+      userId: user.id,
+      deliveriesIds: [],
     });
 
     await this.deliverymanRepository.create(deliveryman);

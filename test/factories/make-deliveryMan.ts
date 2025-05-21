@@ -13,9 +13,8 @@ export function makeDeliveryMan(
 ) {
   const deliveryMan = Deliveryman.create(
     {
-      name: faker.person.fullName(),
-      cpf: faker.number.int({ min: 10000000000, max: 99999999999 }).toString(),
-      password: faker.internet.password(),
+      userId: new UniqueEntityID(),
+      deliveriesIds: [],
       ...override,
     },
     id
