@@ -1,6 +1,5 @@
 import { InMemoryRecipientRepository } from "test/repositories/in-memory-recipient-repository";
 import { makeRecipient } from "test/factories/make-recipient";
-import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 import { makeUser } from "test/factories/make-user";
 import { EditRecipientUseCase } from "./edit-recipient";
 
