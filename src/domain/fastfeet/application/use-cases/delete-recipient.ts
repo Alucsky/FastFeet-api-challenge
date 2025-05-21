@@ -1,6 +1,7 @@
 import { Either, left, right } from "@/core/either";
 import { ResourceNotFoundError } from "@/core/errors/errors/resource-not-found-error";
 import { RecipientRepository } from "../repositories/recipient-repository";
+import { UsersRepository } from "../repositories/users-repository";
 
 interface DeleterecipientUseCaseRequest {
   recipientId: string;
@@ -9,7 +10,10 @@ interface DeleterecipientUseCaseRequest {
 type DeleterecipientUseCaseResponse = Either<ResourceNotFoundError, {}>;
 
 export class DeleteRecipientUseCase {
-  constructor(private recipientRepository: RecipientRepository) {}
+  constructor(
+    private recipientRepository: RecipientRepository,
+    private usersRepository: UsersRepository
+  ) {}
 
   async execute({
     recipientId,
@@ -21,6 +25,7 @@ export class DeleteRecipientUseCase {
     }
 
     await this.recipientRepository.delete(recipientId);
+    await this.usersRepository.delete(recipient.userId.toString());
 
     return right({});
   }

@@ -1,8 +1,8 @@
-import { Entity } from "@/core/entities/entity";
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
+import { UserProps } from "./user";
+import { Entity } from "@/core/entities/entity";
 
-export interface RecipientProps {
-  name: string;
+interface Address {
   street: string;
   number: string;
   neighborhood: string;
@@ -11,55 +11,26 @@ export interface RecipientProps {
   state: string;
 }
 
+export interface RecipientProps {
+  userId: UniqueEntityID;
+  address: Address;
+}
+
 export class Recipient extends Entity<RecipientProps> {
-  get name() {
-    return this.props.name;
+  constructor(props: RecipientProps, id?: UniqueEntityID) {
+    super(props, id);
   }
-  set name(name: string) {
-    this.props.name = name;
-  }
-
-  get street() {
-    return this.props.street;
-  }
-  set street(street: string) {
-    this.props.street = street;
+  get userId() {
+    return this.props.userId;
   }
 
-  get number() {
-    return this.props.number;
+  get address() {
+    return this.props.address;
   }
-  set number(number: string) {
-    this.props.number = number;
-  }
-
-  get neighborhood() {
-    return this.props.neighborhood;
-  }
-  set neighborhood(neighborhood: string) {
-    this.props.neighborhood = neighborhood;
+  set address(address: Address) {
+    this.props.address = address;
   }
 
-  get city() {
-    return this.props.city;
-  }
-  set city(city: string) {
-    this.props.city = city;
-  }
-
-  get postalCode() {
-    return this.props.postalCode;
-  }
-  set postalCode(postalCode: string) {
-    this.props.postalCode = postalCode;
-  }
-
-  get state() {
-    return this.props.state;
-  }
-  set state(state: string) {
-    this.props.state = state;
-  }
   static create(props: RecipientProps, id?: UniqueEntityID) {
     return new Recipient(props, id);
   }

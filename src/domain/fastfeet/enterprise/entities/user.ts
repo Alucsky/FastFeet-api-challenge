@@ -1,13 +1,16 @@
 import { Entity } from "@/core/entities/entity";
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 
-export interface AdministratorProps {
+export interface UserProps {
   name: string;
   cpf: string;
   password: string;
 }
+export class User extends Entity<UserProps> {
+  constructor(props: UserProps, id?: UniqueEntityID) {
+    super(props, id);
+  }
 
-export class Administrator extends Entity<AdministratorProps> {
   get name() {
     return this.props.name;
   }
@@ -29,7 +32,7 @@ export class Administrator extends Entity<AdministratorProps> {
     this.props.password = password;
   }
 
-  static create(props: AdministratorProps, id?: UniqueEntityID) {
-    return new Administrator(props, id);
+  static create(props: UserProps, id?: UniqueEntityID) {
+    return new User(props, id);
   }
 }

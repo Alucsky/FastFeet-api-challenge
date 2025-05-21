@@ -1,7 +1,7 @@
 import { InMemoryRecipientRepository } from "test/repositories/in-memory-recipient-repository";
 import { makeRecipient } from "test/factories/make-recipient";
 import { GetRecipientUseCase } from "./get-recipient";
-import { a } from "vitest/dist/chunks/suite.d.FvehnV49";
+import { makeUser } from "test/factories/make-user";
 
 let inMemoryRecipientRepository: InMemoryRecipientRepository;
 let sut: GetRecipientUseCase;
@@ -13,14 +13,20 @@ describe("get Recipient", () => {
   });
 
   it("should be able to get an Recipient", async () => {
+    const user = makeUser({
+      name: "Samuel",
+    });
+
     const recipient = makeRecipient({
-      name: "John Doe",
-      city: "São Paulo",
-      state: "SP",
-      street: "Rua Teste",
-      number: "123",
-      neighborhood: "Centro",
-      postalCode: "12345678",
+      userId: user.id,
+      address: {
+        city: "joinville",
+        neighborhood: "bairro",
+        number: "232",
+        postalCode: "342342",
+        state: "SC",
+        street: "manuel correia",
+      },
     });
 
     await inMemoryRecipientRepository.create(recipient);
@@ -31,17 +37,19 @@ describe("get Recipient", () => {
     });
 
     expect(result.isRight()).toBe(true);
+    console.log(result.value);
 
     expect(result.value).toMatchObject({
-      recipient: expect.objectContaining({
-        name: "John Doe",
-        city: "São Paulo",
-        state: "SP",
-        street: "Rua Teste",
-        number: "123",
-        neighborhood: "Centro",
-        postalCode: "12345678",
-      }),
+      recipient: {
+        address: {
+          city: "joinville",
+          neighborhood: "bairro",
+          number: "232",
+          postalCode: "342342",
+          state: "SC",
+          street: "manuel correia",
+        },
+      },
     });
   });
 });

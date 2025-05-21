@@ -13,15 +13,17 @@ export function makeRecipient(
 ) {
   const recipient = Recipient.create(
     {
-      name: faker.person.fullName(),
-      street: faker.location.street(),
-      number: faker.location.buildingNumber(),
-      neighborhood: faker.person.firstName(),
-      // Using firstName as a placeholder for neighborhood
-      // since faker doesn't have a specific method for neighborhoods
-      city: faker.location.city(),
-      postalCode: faker.location.zipCode(),
-      state: faker.location.state(),
+      userId: new UniqueEntityID(),
+      address: {
+        street: faker.location.street(),
+        number: faker.location.buildingNumber(),
+        neighborhood: faker.person.firstName(),
+        // Using firstName as a placeholder for neighborhood
+        // since faker doesn't have a specific method for neighborhoods
+        city: faker.location.city(),
+        postalCode: faker.location.zipCode(),
+        state: faker.location.state(),
+      },
       ...override,
     },
     id

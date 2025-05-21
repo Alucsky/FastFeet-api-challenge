@@ -1,20 +1,35 @@
 import { InMemoryRecipientRepository } from "test/repositories/in-memory-recipient-repository";
 import { makeRecipient } from "test/factories/make-recipient";
 import { DeleteRecipientUseCase } from "./delete-recipient";
+import { InMemoryUsersRepository } from "test/repositories/in-memory-users-repository";
+import { UniqueEntityID } from "@/core/entities/unique-entity-id";
+import { makeUser } from "test/factories/make-user";
 
 let inMemoryRecipientRepository: InMemoryRecipientRepository;
+let inMemoryUsersRepository: InMemoryUsersRepository;
 let sut: DeleteRecipientUseCase;
 
 describe("Delete Recipient", () => {
   beforeEach(() => {
     inMemoryRecipientRepository = new InMemoryRecipientRepository();
-    sut = new DeleteRecipientUseCase(inMemoryRecipientRepository);
+    inMemoryUsersRepository = new InMemoryUsersRepository();
+    sut = new DeleteRecipientUseCase(
+      inMemoryRecipientRepository,
+      inMemoryUsersRepository
+    );
   });
 
   it("should be able to delete an Recipient", async () => {
-    const recipient = makeRecipient();
+    const user = makeUser({
+      name: "seilaaaa",
+    });
+
+    const recipient = makeRecipient({
+      userId: new UniqueEntityID("user-1"),
+    });
 
     await inMemoryRecipientRepository.create(recipient);
+    console.log(recipient);
 
     expect(inMemoryRecipientRepository.items).toHaveLength(1);
 

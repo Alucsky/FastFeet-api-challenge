@@ -1,40 +1,43 @@
 import { InMemoryRecipientRepository } from "test/repositories/in-memory-recipient-repository";
 import { CreateRecipientUseCase } from "./create-recipient";
-import { makeRecipient } from "test/factories/make-recipient";
+import { InMemoryUsersRepository } from "test/repositories/in-memory-users-repository";
 
+let inMemoryUserRepository: InMemoryUsersRepository;
 let inMemoryRecipientRepository: InMemoryRecipientRepository;
 let sut: CreateRecipientUseCase;
 
-describe("Create Recipient", () => {
+describe.only("Create Recipient", () => {
   beforeEach(() => {
     inMemoryRecipientRepository = new InMemoryRecipientRepository();
-    sut = new CreateRecipientUseCase(inMemoryRecipientRepository);
+    inMemoryUserRepository = new InMemoryUsersRepository();
+    sut = new CreateRecipientUseCase(
+      inMemoryRecipientRepository,
+      inMemoryUserRepository
+    );
   });
 
   it("should be able to create an Recipient", async () => {
-    const recipient = makeRecipient({
+    const result = await sut.execute({
       name: "John Doe",
-      city: "São Paulo",
-      state: "SP",
+      password: "123456",
+      cpf: "12345678901",
       street: "Rua Teste",
       number: "123",
       neighborhood: "Centro",
+      city: "São Paulo",
       postalCode: "12345678",
+      state: "SP",
     });
 
-    const result = await sut.execute(recipient);
-
     expect(result.isRight()).toBe(true);
-    expect(result.value?.recipient).toEqual(
-      expect.objectContaining({
-        name: "John Doe",
-        city: "São Paulo",
-        state: "SP",
-        street: "Rua Teste",
-        number: "123",
-        neighborhood: "Centro",
-        postalCode: "12345678",
-      })
-    );
+    expect(inMemoryRecipientRepository.items).toHaveLength(1);
+    expect(result.value?.recipient.address).toMatchObject({
+      street: "Rua Teste",
+      number: "123",
+      neighborhood: "Centro",
+      city: "São Paulo",
+      postalCode: "12345678",
+      state: "SP",
+    });
   });
 });
