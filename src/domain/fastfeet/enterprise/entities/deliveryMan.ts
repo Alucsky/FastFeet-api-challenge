@@ -1,9 +1,9 @@
 import { Entity } from "@/core/entities/entity";
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
+import { Delivery } from "./delivery";
 
 export interface DeliverymanProps {
   userId: string;
-  
 }
 
 export class Deliveryman extends Entity<DeliverymanProps> {

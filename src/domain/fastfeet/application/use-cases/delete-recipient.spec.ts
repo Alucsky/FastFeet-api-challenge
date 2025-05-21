@@ -25,7 +25,7 @@ describe("Delete Recipient", () => {
     });
 
     const recipient = makeRecipient({
-      userId: new UniqueEntityID("user-1"),
+      userId: user.id,
     });
 
     await inMemoryRecipientRepository.create(recipient);
