@@ -6,7 +6,7 @@ export class DeliveryStatus {
   static readonly DELIVERED = new DeliveryStatus("delivered");
 
   static fromStringToEnum(value: string) {
-    switch (value) {
+    switch (value.toLowerCase()) {
       case "pending":
         return DeliveryStatus.PENDING;
       case "in_progress":

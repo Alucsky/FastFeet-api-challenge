@@ -2,15 +2,13 @@ import { Entity } from "@/core/entities/entity";
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 import { DeliveryStatus } from "./value-objects/deliveryStatus";
 
-
-
 export interface DeliveryProps {
   recipientId: UniqueEntityID;
   deliverymanId: UniqueEntityID | null;
   status: DeliveryStatus;
   postedAt: Date;
-  pickedUpAt?: Date | null;
-  deliveredAt?: Date | null;
+  pickedUpAt: Date | null;
+  deliveredAt: Date | null;
 }
 
 export class Delivery extends Entity<DeliveryProps> {
@@ -21,7 +19,7 @@ export class Delivery extends Entity<DeliveryProps> {
   get deliverymanId() {
     return this.props.deliverymanId;
   }
-  set deliverymanId(deliverymanId: UniqueEntityID | null ) {
+  set deliverymanId(deliverymanId: UniqueEntityID | null) {
     this.props.deliverymanId = deliverymanId;
   }
 
@@ -40,16 +38,16 @@ export class Delivery extends Entity<DeliveryProps> {
   }
 
   get pickedUpAt() {
-    return this.props.pickedUpAt ?? new Date(0);
+    return this.props.pickedUpAt;
   }
-  set pickedUpAt(pickedUpAt: Date) {
+  set pickedUpAt(pickedUpAt: Date | null) {
     this.props.pickedUpAt = pickedUpAt;
   }
 
   get deliveredAt() {
-    return this.props.deliveredAt ?? new Date(0);
+    return this.props.deliveredAt;
   }
-  set deliveredAt(deliveredAt: Date) {
+  set deliveredAt(deliveredAt: Date | null) {
     this.props.deliveredAt = deliveredAt;
   }
 
