@@ -37,7 +37,6 @@ describe("get Recipient", () => {
     });
 
     expect(result.isRight()).toBe(true);
-    console.log(result.value);
 
     expect(result.value).toMatchObject({
       recipient: {

@@ -6,7 +6,7 @@ let inMemoryUserRepository: InMemoryUsersRepository;
 let inMemoryRecipientRepository: InMemoryRecipientRepository;
 let sut: CreateRecipientUseCase;
 
-describe.only("Create Recipient", () => {
+describe("Create Recipient", () => {
   beforeEach(() => {
     inMemoryRecipientRepository = new InMemoryRecipientRepository();
     inMemoryUserRepository = new InMemoryUsersRepository();

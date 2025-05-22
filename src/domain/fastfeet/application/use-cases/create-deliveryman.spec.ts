@@ -6,7 +6,7 @@ let inMemoryUserRepository: InMemoryUsersRepository;
 let inMemoryDeliveryManRepository: InMemoryDeliveryManRepository;
 let sut: CreateDeliverymanUseCase;
 
-describe.only("Create Deliveryman", () => {
+describe("Create Deliveryman", () => {
   beforeEach(() => {
     inMemoryDeliveryManRepository = new InMemoryDeliveryManRepository();
     inMemoryUserRepository = new InMemoryUsersRepository();
