@@ -1,15 +1,12 @@
 import { Entity } from "@/core/entities/entity";
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
+import { DeliveryStatus } from "./value-objects/deliveryStatus";
 
-export enum DeliveryStatus {
-  PENDING = "pending",
-  PICKED_UP = "picked_up",
-  DELIVERED = "delivered",
-}
+
 
 export interface DeliveryProps {
   recipientId: UniqueEntityID;
-  deliverymanId?: UniqueEntityID | null;
+  deliverymanId: UniqueEntityID | null;
   status: DeliveryStatus;
   postedAt: Date;
   pickedUpAt?: Date | null;
@@ -24,7 +21,7 @@ export class Delivery extends Entity<DeliveryProps> {
   get deliverymanId() {
     return this.props.deliverymanId;
   }
-  set deliverymanId(deliverymanId: UniqueEntityID | null | undefined) {
+  set deliverymanId(deliverymanId: UniqueEntityID | null ) {
     this.props.deliverymanId = deliverymanId;
   }
 
