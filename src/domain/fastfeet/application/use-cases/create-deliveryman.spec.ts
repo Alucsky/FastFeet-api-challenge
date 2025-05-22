@@ -1,6 +1,6 @@
 import { InMemoryUsersRepository } from "test/repositories/in-memory-users-repository";
 import { InMemoryDeliveryManRepository } from "test/repositories/in-memory-deliveryMan-repository";
-import { CreateDeliverymanUseCase } from "./create-deliveryMan";
+import { CreateDeliverymanUseCase } from "./create-deliveryman";
 
 let inMemoryUserRepository: InMemoryUsersRepository;
 let inMemoryDeliveryManRepository: InMemoryDeliveryManRepository;

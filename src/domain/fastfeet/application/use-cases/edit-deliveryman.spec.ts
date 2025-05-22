@@ -1,6 +1,5 @@
 import { InMemoryUsersRepository } from "test/repositories/in-memory-users-repository";
 import { InMemoryDeliveryManRepository } from "test/repositories/in-memory-deliveryMan-repository";
-import { CreateDeliverymanUseCase } from "./create-deliveryMan";
 import { EditDeliverymanUseCase } from "./edit-deliveryman";
 import { makeDeliveryMan } from "test/factories/make-deliveryMan";
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
