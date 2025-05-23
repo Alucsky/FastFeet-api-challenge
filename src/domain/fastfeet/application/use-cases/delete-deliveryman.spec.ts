@@ -6,16 +6,13 @@ import { InMemoryUsersRepository } from "test/repositories/in-memory-users-repos
 import { makeUser } from "test/factories/make-user";
 
 let inMemoryDeliveryManRepository: InMemoryDeliveryManRepository;
-let inMemoryUsersRepository: InMemoryUsersRepository;
 let sut: DeleteDeliverymanUseCase;
 
 describe("Delete Deliveryman", () => {
   beforeEach(() => {
     inMemoryDeliveryManRepository = new InMemoryDeliveryManRepository();
-    inMemoryUsersRepository = new InMemoryUsersRepository();
     sut = new DeleteDeliverymanUseCase(
       inMemoryDeliveryManRepository,
-      inMemoryUsersRepository
     );
   });
 
@@ -34,11 +31,9 @@ describe("Delete Deliveryman", () => {
       new UniqueEntityID("2")
     );
 
-    await inMemoryUsersRepository.create(user);
     await inMemoryDeliveryManRepository.create(deliveryMan);
 
     expect(inMemoryDeliveryManRepository.items).toHaveLength(1);
-    expect(inMemoryUsersRepository.items).toHaveLength(1);
 
     const result = await sut.execute({
       deliverymanId: "2",
@@ -46,6 +41,5 @@ describe("Delete Deliveryman", () => {
 
     expect(result.isRight()).toBe(true);
     expect(inMemoryDeliveryManRepository.items).toHaveLength(0);
-    expect(inMemoryUsersRepository.items).toHaveLength(0);
   });
 });

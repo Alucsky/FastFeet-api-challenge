@@ -1,5 +1,4 @@
 import { Either, left, right } from "@/core/either";
-import { UsersRepository } from "../repositories/users-repository";
 import { DeliveryManRepository } from "../repositories/deliveryMan-repository";
 import { Deliveryman } from "../../enterprise/entities/deliveryMan";
 import { ResourceNotFoundError } from "@/core/errors/errors/resource-not-found-error";
