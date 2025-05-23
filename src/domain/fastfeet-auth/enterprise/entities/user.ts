@@ -1,16 +1,24 @@
 import { Entity } from "@/core/entities/entity";
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
+import { UserType } from "./value-objects/userType";
 
 export interface UserProps {
   name: string;
   cpf: string;
   password: string;
+  userType: UserType;
 }
 export class User extends Entity<UserProps> {
   constructor(props: UserProps, id?: UniqueEntityID) {
     super(props, id);
   }
 
+  get userType() {
+    return this.props.userType;
+  }
+  set userType(userType: UserType) {
+    this.props.userType = userType;
+  }
   get name() {
     return this.props.name;
   }
