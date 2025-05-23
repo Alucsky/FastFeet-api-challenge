@@ -1,5 +1,4 @@
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
-import { UserProps } from "./user";
 import { Entity } from "@/core/entities/entity";
 
 interface Address {

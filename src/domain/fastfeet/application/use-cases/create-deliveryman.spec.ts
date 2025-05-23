@@ -1,6 +1,7 @@
 import { InMemoryUsersRepository } from "test/repositories/in-memory-users-repository";
 import { InMemoryDeliveryManRepository } from "test/repositories/in-memory-deliveryMan-repository";
 import { CreateDeliverymanUseCase } from "./create-deliveryman";
+import { makeUser } from "test/factories/make-user";
 
 let inMemoryUserRepository: InMemoryUsersRepository;
 let inMemoryDeliveryManRepository: InMemoryDeliveryManRepository;
@@ -10,22 +11,21 @@ describe("Create Deliveryman", () => {
   beforeEach(() => {
     inMemoryDeliveryManRepository = new InMemoryDeliveryManRepository();
     inMemoryUserRepository = new InMemoryUsersRepository();
-    sut = new CreateDeliverymanUseCase(
-      inMemoryDeliveryManRepository,
-      inMemoryUserRepository
-    );
+    sut = new CreateDeliverymanUseCase(inMemoryDeliveryManRepository);
   });
 
   it("should be able to create a Deliveryman", async () => {
-    const result = await sut.execute({
+    const user = makeUser({
       name: "Samuel",
       password: "123456",
       cpf: "12345678901",
     });
+    const result = await sut.execute({
+      userId: user.id.toString(),
+    });
 
     expect(result.isRight()).toBe(true);
     expect(inMemoryDeliveryManRepository.items).toHaveLength(1);
-
-  
+    expect(inMemoryDeliveryManRepository.items[0].userId).toEqual(user.id);
   });
 });

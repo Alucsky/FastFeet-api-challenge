@@ -1,8 +1,7 @@
 import { faker } from "@faker-js/faker";
-
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
+import { User, UserProps } from "@/domain/fastfeet-auth/enterprise/entities/user";
 
-import { User, UserProps } from "@/domain/fastfeet/enterprise/entities/user";
 
 export function makeUser(
   override: Partial<UserProps> = {},

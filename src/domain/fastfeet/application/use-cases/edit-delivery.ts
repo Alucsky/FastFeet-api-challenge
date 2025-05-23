@@ -45,7 +45,7 @@ export class EditDeliveryUseCase {
       : delivery.status;
 
     delivery.pickedUpAt = pickedUpAt ? pickedUpAt : delivery.pickedUpAt;
-    
+
     delivery.deliveredAt = deliveredAt ? deliveredAt : delivery.deliveredAt;
 
     await this.deliveryRepository.update(delivery);

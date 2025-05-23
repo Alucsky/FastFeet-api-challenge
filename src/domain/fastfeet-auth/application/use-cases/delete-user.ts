@@ -1,35 +1,27 @@
 import { Either, left, right } from "@/core/either";
-import { Recipient } from "../../enterprise/entities/recipient";
-import { RecipientRepository } from "../repositories/recipient-repository";
 import { UsersRepository } from "../repositories/users-repository";
-import { User } from "../../enterprise/entities/user";
 import { ResourceNotFoundError } from "@/core/errors/errors/resource-not-found-error";
 
-interface GetUserUseCaseRequest {
+interface DeleteUserUseCaseRequest {
   userId: string;
 }
 
-type GetUserUseCaseResponse = Either<
-  ResourceNotFoundError,
-  {
-    user: User;
-  }
->;
+type DeleteUserUseCaseResponse = Either<ResourceNotFoundError, {}>;
 
-export class GetUserUseCase {
+export class DeleteUserUseCase {
   constructor(private usersRepository: UsersRepository) {}
 
   async execute({
     userId,
-  }: GetUserUseCaseRequest): Promise<GetUserUseCaseResponse> {
+  }: DeleteUserUseCaseRequest): Promise<DeleteUserUseCaseResponse> {
     const user = await this.usersRepository.findById(userId);
 
     if (!user) {
       return left(new ResourceNotFoundError());
     }
 
-    return right({
-      user,
-    });
+    await this.usersRepository.delete(userId);
+
+    return right({});
   }
 }

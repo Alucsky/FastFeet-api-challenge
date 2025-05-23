@@ -1,13 +1,10 @@
 import { Either, right } from "@/core/either";
 import { Recipient } from "../../enterprise/entities/recipient";
 import { RecipientRepository } from "../repositories/recipient-repository";
-import { UsersRepository } from "../repositories/users-repository";
-import { User } from "../../enterprise/entities/user";
+import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 
 interface CreateRecipientUseCaseRequest {
-  name: string;
-  password: string;
-  cpf: string;
+  userId: string;
   street: string;
   number: string;
   neighborhood: string;
@@ -24,28 +21,19 @@ type CreateRecipientUseCaseResponse = Either<
 >;
 
 export class CreateRecipientUseCase {
-  constructor(
-    private recipientRepository: RecipientRepository,
-    private usersRepository: UsersRepository
-  ) {}
+  constructor(private recipientRepository: RecipientRepository) {}
 
   async execute({
-    name,
-    cpf,
-    password,
     street,
     number,
     neighborhood,
     city,
     postalCode,
     state,
+    userId,
   }: CreateRecipientUseCaseRequest): Promise<CreateRecipientUseCaseResponse> {
-    const user = User.create({ name, cpf, password });
-
-    await this.usersRepository.create(user);
-
     const recipient = Recipient.create({
-      userId: user.id,
+      userId: new UniqueEntityID(userId),
       address: {
         street,
         number,

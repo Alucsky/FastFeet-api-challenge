@@ -1,4 +1,4 @@
-import { User } from "@/domain/fastfeet/enterprise/entities/user";
+import { User } from "@/domain/fastfeet-auth/enterprise/entities/user";
 
 export class InMemoryUsersRepository {
   public items: User[] = [];

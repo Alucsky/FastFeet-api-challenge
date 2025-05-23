@@ -1,13 +1,10 @@
 import { Either, right } from "@/core/either";
-import { UsersRepository } from "../repositories/users-repository";
-import { User } from "../../enterprise/entities/user";
 import { DeliveryManRepository } from "../repositories/deliveryMan-repository";
 import { Deliveryman } from "../../enterprise/entities/deliveryMan";
+import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 
 interface CreateDeliverymanUseCaseRequest {
-  name: string;
-  cpf: string;
-  password: string;
+  userId: string;
 }
 
 type CreateDeliverymanUseCaseResponse = Either<
@@ -18,22 +15,13 @@ type CreateDeliverymanUseCaseResponse = Either<
 >;
 
 export class CreateDeliverymanUseCase {
-  constructor(
-    private deliverymanRepository: DeliveryManRepository,
-    private usersRepository: UsersRepository
-  ) {}
+  constructor(private deliverymanRepository: DeliveryManRepository) {}
 
   async execute({
-    name,
-    cpf,
-    password,
+    userId,
   }: CreateDeliverymanUseCaseRequest): Promise<CreateDeliverymanUseCaseResponse> {
-    const user = User.create({ name, cpf, password });
-
-    await this.usersRepository.create(user);
-
     const deliveryman = Deliveryman.create({
-      userId: user.id,
+      userId: new UniqueEntityID(userId),
       deliveriesIds: [],
     });
 

@@ -1,6 +1,4 @@
 import { Either, right } from "@/core/either";
-import { Recipient } from "../../enterprise/entities/recipient";
-import { RecipientRepository } from "../repositories/recipient-repository";
 import { UsersRepository } from "../repositories/users-repository";
 import { User } from "../../enterprise/entities/user";
 
