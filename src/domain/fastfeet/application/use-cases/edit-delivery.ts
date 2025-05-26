@@ -11,6 +11,7 @@ interface EditDeliveryUseCaseRequest {
   status?: string;
   pickedUpAt?: Date | null;
   deliveredAt?: Date | null;
+  neighborhood?: string;
 }
 
 type EditDeliveryUseCaseResponse = Either<
@@ -29,6 +30,7 @@ export class EditDeliveryUseCase {
     status,
     pickedUpAt,
     deliveredAt,
+    neighborhood,
   }: EditDeliveryUseCaseRequest): Promise<EditDeliveryUseCaseResponse> {
     const delivery = await this.deliveryRepository.findById(deliveryId);
 
@@ -47,6 +49,8 @@ export class EditDeliveryUseCase {
     delivery.pickedUpAt = pickedUpAt ? pickedUpAt : delivery.pickedUpAt;
 
     delivery.deliveredAt = deliveredAt ? deliveredAt : delivery.deliveredAt;
+
+    delivery.neighborhood = neighborhood ? neighborhood : delivery.neighborhood;
 
     await this.deliveryRepository.update(delivery);
 

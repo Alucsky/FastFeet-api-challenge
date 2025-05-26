@@ -5,6 +5,7 @@ import { DeliveryStatus } from "./value-objects/deliveryStatus";
 export interface DeliveryProps {
   recipientId: UniqueEntityID;
   deliverymanId: UniqueEntityID | null;
+  neighborhood: string;
   status: DeliveryStatus;
   postedAt: Date;
   pickedUpAt: Date | null;
@@ -18,6 +19,12 @@ export class Delivery extends Entity<DeliveryProps> {
 
   get deliverymanId() {
     return this.props.deliverymanId;
+  }
+  get neighborhood() {
+    return this.props.neighborhood;
+  }
+  set neighborhood(neighborhood: string) {
+    this.props.neighborhood = neighborhood;
   }
   set deliverymanId(deliverymanId: UniqueEntityID | null) {
     this.props.deliverymanId = deliverymanId;

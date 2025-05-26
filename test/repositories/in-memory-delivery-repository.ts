@@ -39,4 +39,7 @@ export class InMemoryDeliveryRepository implements DeliveryRepository {
 
     return delivery;
   }
+  async findManyDeliveriesByneighborhood(neighborhood: string) {
+    return this.items.filter((item) => item.neighborhood === neighborhood);
+  }
 }

@@ -8,6 +8,7 @@ interface CreateDeliveryUseCaseRequest {
   recipientId: string;
   deliverymanId: string | null;
   status: string;
+  neighborhood: string;
 }
 
 type CreateDeliveryUseCaseResponse = Either<
@@ -24,6 +25,7 @@ export class CreateDeliveryUseCase {
     recipientId,
     deliverymanId,
     status,
+    neighborhood,
   }: CreateDeliveryUseCaseRequest): Promise<CreateDeliveryUseCaseResponse> {
     const delivery = Delivery.create({
       recipientId: new UniqueEntityID(recipientId),
@@ -32,6 +34,7 @@ export class CreateDeliveryUseCase {
       postedAt: new Date(),
       pickedUpAt: null,
       deliveredAt: null,
+      neighborhood,
     });
 
     await this.deliveryRepository.create(delivery);

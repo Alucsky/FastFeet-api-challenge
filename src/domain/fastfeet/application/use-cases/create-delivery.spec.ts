@@ -17,6 +17,7 @@ describe("Create delivery", () => {
       recipientId: "1",
       deliverymanId: "1",
       status: "pending",
+      neighborhood: "neighborhood",
     });
 
     expect(result.isRight()).toBe(true);
@@ -34,6 +35,7 @@ describe("Create delivery", () => {
       recipientId: "1",
       deliverymanId: null,
       status: "pending",
+      neighborhood: "neighborhood",
     });
 
     expect(result.isRight()).toBe(true);

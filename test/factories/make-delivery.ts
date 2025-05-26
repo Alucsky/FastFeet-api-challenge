@@ -4,6 +4,7 @@ import {
   DeliveryProps,
 } from "@/domain/fastfeet/enterprise/entities/delivery";
 import { DeliveryStatus } from "@/domain/fastfeet/enterprise/entities/value-objects/deliveryStatus";
+import { faker } from "@faker-js/faker";
 
 export function makeDelivery(
   override: Partial<DeliveryProps> = {},
@@ -17,6 +18,7 @@ export function makeDelivery(
       postedAt: new Date(),
       pickedUpAt: null,
       deliveredAt: null,
+      neighborhood: faker.word.words({ count: { min: 2, max: 5 } }),
       ...override,
     },
     id
