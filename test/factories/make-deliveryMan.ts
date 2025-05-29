@@ -2,23 +2,19 @@ import { faker } from "@faker-js/faker";
 
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 
-import {
-  Deliveryman,
-  DeliverymanProps,
-} from "@/domain/deliveries/enterprise/entities/deliveryman";
+import { DeliverymanWithPassword } from "@/domain/deliveries/enterprise/entities/value-objects/deliveryman-with-password";
 
 export function makeDeliveryman(
-  override: Partial<DeliverymanProps> = {},
+  override: Partial<DeliverymanWithPassword> = {},
   id?: UniqueEntityID
 ) {
-  const deliveryman = Deliveryman.create(
-    {
-      name: faker.person.firstName(),
-      cpf: faker.number.int({ min: 10000000000, max: 99999999999 }).toString(),
-      ...override,
-    },
-    id
-  );
+  const deliveryman = DeliverymanWithPassword.create({
+    id: id ?? new UniqueEntityID(),
+    name: faker.person.firstName(),
+    cpf: faker.number.int({ min: 10000000000, max: 99999999999 }).toString(),
+    password: faker.internet.password(),
+    ...override,
+  });
 
   return deliveryman;
 }

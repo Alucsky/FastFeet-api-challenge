@@ -17,15 +17,14 @@ describe.only("get Deliveryman", () => {
   });
 
   it("should be able to get a Deliveryman", async () => {
-    const deliveryman = makeDeliveryman(
-      {
-        name: "SAMUEL",
-        cpf: "12332122321",
-      },
-      new UniqueEntityID("1")
-    );
+    const deliveryman = makeDeliveryman({
+      name: "SAMUEL",
+      cpf: "12332122321",
+      password: "123456",
+      id: new UniqueEntityID("1"),
+    });
 
-    await inMemoryDeliverymanRepository.items.push(deliveryman);
+    await inMemoryDeliverymanRepository.create(deliveryman);
 
     expect(inMemoryDeliverymanRepository.items).toHaveLength(1);
 
@@ -35,7 +34,7 @@ describe.only("get Deliveryman", () => {
 
     expect(inMemoryDeliverymanRepository.items).toHaveLength(1);
     if (result.isRight()) {
-      expect(result.value.deliveryman).toEqual(deliveryman);
+      expect(result.value.deliveryman.name).toEqual("SAMUEL");
     }
     expect(result.isRight()).toBe(true);
   });

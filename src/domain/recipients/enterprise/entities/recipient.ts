@@ -4,7 +4,7 @@ import { Entity } from "@/core/entities/entity";
 export interface RecipientProps {
   name: string;
   cpf: string;
-  address: string; //mudar depoisss
+  addressId: string;
 }
 
 export class Recipient extends Entity<RecipientProps> {
@@ -18,6 +18,10 @@ export class Recipient extends Entity<RecipientProps> {
 
   get cpf() {
     return this.props.cpf;
+  }
+
+  get addressId() {
+    return this.props.addressId;
   }
 
   static create(props: RecipientProps, id?: UniqueEntityID) {

@@ -33,7 +33,6 @@ describe("Edit User", () => {
     expect(result.isRight()).toBe(true);
     expect(inMemoryUserRepository.items).toHaveLength(1);
     if (result.isRight()) {
-      console.log(result.value.user);
       expect(result.value.user).toMatchObject({
         name: "Samuel Doe",
         password: "123456",

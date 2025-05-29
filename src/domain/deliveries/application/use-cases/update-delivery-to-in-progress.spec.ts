@@ -22,11 +22,10 @@ describe("Update an delivery to in progress", () => {
 
   it("should be able to Update an delivery to in progress", async () => {
     const delivery = makeDelivery({}, new UniqueEntityID(`delivery-1`));
-    const deliveryman = makeDeliveryman(
-      {},
-      new UniqueEntityID("deliveryman-1")
-    );
-    await inMemoryDeliverymanRepository.items.push(deliveryman);
+    const deliveryman = makeDeliveryman({
+      id: new UniqueEntityID("deliveryman-1"),
+    });
+    await inMemoryDeliverymanRepository.create(deliveryman);
     await inMemoryDeliveryRepository.create(delivery);
 
     const result = await sut.execute({
