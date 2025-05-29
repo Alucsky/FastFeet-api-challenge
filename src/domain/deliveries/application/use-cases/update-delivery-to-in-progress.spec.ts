@@ -1,10 +1,10 @@
 import { InMemoryDeliveryRepository } from "test/repositories/in-memory-delivery-repository";
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 import { makeDelivery } from "test/factories/make-delivery";
-import { UpdateDeliveryToDeliveredUseCase } from "./update-delivery-to-delivered";
 import { DeliveryStatus } from "../../enterprise/entities/delivery";
 import { UpdateDeliveryToInProgressUseCase } from "./update-delivery-to-in-progress";
 import { InMemorydeliverymanRepository } from "test/repositories/in-memory-deliveryman-repository";
+import { makeDeliveryman } from "test/factories/make-deliveryMan";
 
 let inMemoryDeliveryRepository: InMemoryDeliveryRepository;
 let inMemoryDeliverymanRepository: InMemorydeliverymanRepository;
@@ -22,13 +22,16 @@ describe("Update an delivery to in progress", () => {
 
   it("should be able to Update an delivery to in progress", async () => {
     const delivery = makeDelivery({}, new UniqueEntityID(`delivery-1`));
-    delivery.deliverymanId = new UniqueEntityID("deliveryman-1");
+    const deliveryman = makeDeliveryman(
+      {},
+      new UniqueEntityID("deliveryman-1")
+    );
+    await inMemoryDeliverymanRepository.items.push(deliveryman);
     await inMemoryDeliveryRepository.create(delivery);
 
     const result = await sut.execute({
       deliveryId: "delivery-1",
       deliverymanId: "deliveryman-1",
-      deliveryConfirmationUrl: "delivery-confirmation-url",
     });
 
     expect(result.isRight()).toBe(true);
@@ -36,11 +39,8 @@ describe("Update an delivery to in progress", () => {
 
     if (result.isRight()) {
       expect(result.value.delivery.id.toString()).toEqual("delivery-1");
-      expect(result.value.delivery.status).toEqual(DeliveryStatus.DELIVERED);
-      expect(result.value.delivery.deliveryConfirmationUrl).toEqual(
-        "delivery-confirmation-url"
-      );
-      expect(result.value.delivery.deliveredAt).toBeInstanceOf(Date);
+      expect(result.value.delivery.status).toEqual(DeliveryStatus.IN_PROGRESS);
+      expect(result.value.delivery.deliveryConfirmationUrl).toEqual(undefined);
     }
   });
 });
