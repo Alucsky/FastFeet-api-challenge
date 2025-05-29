@@ -13,20 +13,9 @@ describe("get Recipient", () => {
   });
 
   it("should be able to get an Recipient", async () => {
-    const user = makeUser({
-      name: "Samuel",
-    });
-
     const recipient = makeRecipient({
-      userId: user.id,
-      address: {
-        city: "joinville",
-        neighborhood: "bairro",
-        number: "232",
-        postalCode: "342342",
-        state: "SC",
-        street: "manuel correia",
-      },
+      cpf: "12345678900",
+      name: "Samuel",
     });
 
     await inMemoryRecipientRepository.create(recipient);
@@ -38,17 +27,8 @@ describe("get Recipient", () => {
 
     expect(result.isRight()).toBe(true);
 
-    expect(result.value).toMatchObject({
-      recipient: {
-        address: {
-          city: "joinville",
-          neighborhood: "bairro",
-          number: "232",
-          postalCode: "342342",
-          state: "SC",
-          street: "manuel correia",
-        },
-      },
-    });
+    if (result.isRight()) {
+      expect(result.value.recipient.name).toEqual("Samuel");
+    }
   });
 });

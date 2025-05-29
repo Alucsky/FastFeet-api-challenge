@@ -2,7 +2,7 @@ import { InMemoryDeliveryRepository } from "test/repositories/in-memory-delivery
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 import { makeDelivery } from "test/factories/make-delivery";
 import { FetchRecentDeliveriesByDeliverymanUseCase } from "./fetch-recent-deliveries-by-deliveryman";
-import { Address } from "../../enterprise/entities/address";
+import { AddressDelivery } from "../../enterprise/entities/addressDelivery";
 
 let inMemoryDeliveryRepository: InMemoryDeliveryRepository;
 let sut: FetchRecentDeliveriesByDeliverymanUseCase;
@@ -30,7 +30,7 @@ describe("Fetch delivery by neighborhood delivery", () => {
       new UniqueEntityID("delivery-2")
     );
 
-    const address1 = Address.create({
+    const address1 = AddressDelivery.create({
       city: "CityTest",
       neighborhood: "neighborhood-1",
       postalCode: "00000-000",

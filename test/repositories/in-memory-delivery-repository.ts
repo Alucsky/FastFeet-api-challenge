@@ -2,12 +2,12 @@ import {
   DeliveryRepository,
   findRecentDeliveriesByDeliverymanProps,
 } from "@/domain/deliveries/application/repositories/delivery-repository";
-import { Address } from "@/domain/deliveries/enterprise/entities/address";
+import { AddressDelivery } from "@/domain/deliveries/enterprise/entities/addressDelivery";
 import { Delivery } from "@/domain/deliveries/enterprise/entities/delivery";
 
 export class InMemoryDeliveryRepository implements DeliveryRepository {
   public items: Delivery[] = [];
-  public deliveryAddres: Address[] = [];
+  public deliveryAddres: AddressDelivery[] = [];
 
   async findRecentDeliveriesByDeliveryman({
     deliverymanId,

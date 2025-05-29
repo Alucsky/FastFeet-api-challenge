@@ -1,7 +1,6 @@
 import { Entity } from "@/core/entities/entity";
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 import { Optional } from "@/core/types/optional";
-import { Address } from "./address";
 
 export enum DeliveryStatus {
   PENDING = "pending",
