@@ -3,6 +3,7 @@ import { DeliverymanWithPassword } from "../../enterprise/entities/value-objects
 
 export interface DeliverymanRepository {
   findById(id: string): Promise<Deliveryman | null>;
+  findByCpf(cpf: string): Promise<Deliveryman | null>;
   create(deliveryman: DeliverymanWithPassword): Promise<Deliveryman>;
   update(deliveryman: Deliveryman): Promise<Deliveryman>;
   delete(deliverymanId: string): Promise<void>;
