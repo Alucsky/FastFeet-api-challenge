@@ -4,13 +4,11 @@ import { Entity } from "@/core/entities/entity";
 export interface RecipientProps {
   name: string;
   cpf: string;
-  addressId: string;
+  addressId?: UniqueEntityID;
 }
 
 export class Recipient extends Entity<RecipientProps> {
-  constructor(props: RecipientProps, id?: UniqueEntityID) {
-    super(props, id);
-  }
+
 
   get name() {
     return this.props.name;
@@ -22,6 +20,10 @@ export class Recipient extends Entity<RecipientProps> {
 
   get addressId() {
     return this.props.addressId;
+  }
+
+  set addressId(addressId: UniqueEntityID | undefined) {
+    this.props.addressId = addressId;
   }
 
   static create(props: RecipientProps, id?: UniqueEntityID) {

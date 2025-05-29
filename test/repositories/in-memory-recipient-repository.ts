@@ -1,13 +1,22 @@
-import { RecipientRepository } from "@/domain/delivery/application/repositories/recipient-repository";
-import { Recipient } from "@/domain/delivery/enterprise/entities/recipient";
+import { UniqueEntityID } from "@/core/entities/unique-entity-id";
+import { RecipientRepository } from "@/domain/recipients/application/repositories/recipient-repository";
+import { Recipient } from "@/domain/recipients/enterprise/entities/recipient";
+import { RecipientWithPassword } from "@/domain/recipients/enterprise/entities/value-objects/recipient-with-password";
 
 export class InMemoryRecipientRepository implements RecipientRepository {
   public items: Recipient[] = [];
 
-  async create(recipient: Recipient) {
-    this.items.push(recipient);
+  async create(recipient: RecipientWithPassword) {
+    const recipientWithoutPassword = Recipient.create(
+      {
+        name: recipient.name,
+        cpf: recipient.cpf,
+      },
+      new UniqueEntityID(recipient.id.toString())
+    );
 
-    return recipient;
+    this.items.push(recipientWithoutPassword);
+    return recipientWithoutPassword;
   }
 
   async findById(id: string) {

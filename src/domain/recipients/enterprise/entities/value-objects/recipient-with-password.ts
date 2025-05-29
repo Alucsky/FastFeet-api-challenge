@@ -13,6 +13,10 @@ export class RecipientWithPassword extends ValueObject<RecipientWithPasswordProp
     return new RecipientWithPassword(props);
   }
 
+  get id() {
+    return this.props.id;
+  }
+
   get password() {
     return this.props.password;
   }
