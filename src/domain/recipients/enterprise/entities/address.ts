@@ -18,6 +18,14 @@ export class Address extends Entity<AddressProps> {
   static create(props: AddressProps, id?: UniqueEntityID) {
     return new Address(props, id);
   }
+  public update(props: Partial<AddressProps>) {
+    if (props.street) this.props.street = props.street;
+    if (props.number) this.props.number = props.number;
+    if (props.neighborhood) this.props.neighborhood = props.neighborhood;
+    if (props.city) this.props.city = props.city;
+    if (props.postalCode) this.props.postalCode = props.postalCode;
+    if (props.state) this.props.state = props.state;
+  }
 
   get street() {
     return this.props.street;

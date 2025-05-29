@@ -8,8 +8,6 @@ export interface RecipientProps {
 }
 
 export class Recipient extends Entity<RecipientProps> {
-
-
   get name() {
     return this.props.name;
   }
@@ -22,7 +20,7 @@ export class Recipient extends Entity<RecipientProps> {
     return this.props.addressId;
   }
 
-  set addressId(addressId: UniqueEntityID | undefined) {
+  set setAddressId(addressId: UniqueEntityID | undefined) {
     this.props.addressId = addressId;
   }
 
