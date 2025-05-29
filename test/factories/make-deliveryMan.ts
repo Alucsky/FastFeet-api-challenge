@@ -5,20 +5,20 @@ import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 import {
   Deliveryman,
   DeliverymanProps,
-} from "@/domain/fastfeet/enterprise/entities/deliveryMan";
+} from "@/domain/deliveries/enterprise/entities/deliveryman";
 
-export function makeDeliveryMan(
+export function makeDeliveryman(
   override: Partial<DeliverymanProps> = {},
   id?: UniqueEntityID
 ) {
-  const deliveryMan = Deliveryman.create(
+  const deliveryman = Deliveryman.create(
     {
-      userId: new UniqueEntityID(),
-      deliveriesIds: [],
+      name: faker.person.firstName(),
+      cpf: faker.number.int({ min: 10000000000, max: 99999999999 }).toString(),
       ...override,
     },
     id
   );
 
-  return deliveryMan;
+  return deliveryman;
 }

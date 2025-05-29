@@ -3,8 +3,8 @@ import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 import {
   User,
   UserProps,
-} from "@/domain/fastfeet-auth/enterprise/entities/user";
-import { UserType } from "@/domain/fastfeet-auth/enterprise/entities/value-objects/userType";
+} from "@/domain/authentication/enterprise/entities/user";
+import { UserType } from "@/domain/authentication/enterprise/entities/value-objects/userType";
 
 export function makeUser(
   override: Partial<UserProps> = {},

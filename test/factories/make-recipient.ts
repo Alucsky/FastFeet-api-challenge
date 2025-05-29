@@ -5,7 +5,7 @@ import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 import {
   Recipient,
   RecipientProps,
-} from "@/domain/fastfeet/enterprise/entities/recipient";
+} from "@/domain/delivery/enterprise/entities/recipient";
 
 export function makeRecipient(
   override: Partial<RecipientProps> = {},

@@ -1,8 +1,47 @@
-import { DeliveryRepository } from "@/domain/fastfeet/application/repositories/delivery-repository";
-import { Delivery } from "@/domain/fastfeet/enterprise/entities/delivery";
+import {
+  DeliveryRepository,
+  findRecentDeliveriesByDeliverymanProps,
+} from "@/domain/deliveries/application/repositories/delivery-repository";
+import { Address } from "@/domain/deliveries/enterprise/entities/address";
+import { Delivery } from "@/domain/deliveries/enterprise/entities/delivery";
 
 export class InMemoryDeliveryRepository implements DeliveryRepository {
   public items: Delivery[] = [];
+  public deliveryAddres: Address[] = [];
+
+  async findRecentDeliveriesByDeliveryman({
+    deliverymanId,
+    address,
+    status,
+  }: findRecentDeliveriesByDeliverymanProps) {
+    let deliveries = this.items.filter(
+      (item) =>
+        item.status === status &&
+        item.deliverymanId?.toString() === deliverymanId.toString()
+    );
+
+    if (address) {
+      const addresFilter: string[] = [];
+
+      this.deliveryAddres.forEach((addressFor) => {
+        if (address.neighborhood) {
+          if (
+            addressFor.city === address.city &&
+            addressFor.neighborhood === address.neighborhood
+          ) {
+            addresFilter.push(addressFor.id.toString());
+          }
+        } else if (addressFor.city === address.city) {
+          addresFilter.push(addressFor.id.toString());
+        }
+      });
+      deliveries = deliveries.filter((delivery) =>
+        addresFilter.includes(delivery.addressId.toString())
+      );
+    }
+
+    return deliveries;
+  }
 
   async findById(deliveryId: string) {
     const delivery = this.items.find(
@@ -38,8 +77,5 @@ export class InMemoryDeliveryRepository implements DeliveryRepository {
     }
 
     return delivery;
-  }
-  async findManyDeliveriesByneighborhood(neighborhood: string) {
-    return this.items.filter((item) => item.neighborhood === neighborhood);
   }
 }
