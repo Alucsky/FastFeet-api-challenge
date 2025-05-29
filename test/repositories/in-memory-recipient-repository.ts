@@ -19,6 +19,16 @@ export class InMemoryRecipientRepository implements RecipientRepository {
     return recipientWithoutPassword;
   }
 
+  async findByCpf(cpf: string) {
+    const recipient = this.items.find((item) => item.cpf === cpf);
+    
+    if (!recipient) {
+      return null;
+    }
+
+    return recipient;
+  }
+
   async findById(id: string) {
     const recipient = this.items.find((item) => item.id.toString() === id);
 

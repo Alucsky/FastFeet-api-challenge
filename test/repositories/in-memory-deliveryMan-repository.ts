@@ -18,6 +18,15 @@ export class InMemorydeliverymanRepository implements DeliverymanRepository {
     this.items.push(deliverymanWithoutPassword);
     return deliverymanWithoutPassword;
   }
+  async findByCpf(cpf: string): Promise<Deliveryman | null> {
+    const deliveryman = this.items.find((item) => item.cpf === cpf);
+
+    if (!deliveryman) {
+      return null;
+    }
+
+    return deliveryman;
+  }
   async findById(id: string): Promise<Deliveryman | null> {
     const deliveryman = this.items.find((item) => item.id.toString() === id);
 

@@ -1,33 +1,18 @@
 import { faker } from "@faker-js/faker";
-
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
-
-import {
-  Recipient,
-  RecipientProps,
-} from "@/domain/delivery/enterprise/entities/recipient";
+import { RecipientWithPassword } from "@/domain/recipients/enterprise/entities/value-objects/recipient-with-password";
 
 export function makeRecipient(
-  override: Partial<RecipientProps> = {},
+  override: Partial<RecipientWithPassword> = {},
   id?: UniqueEntityID
 ) {
-  const recipient = Recipient.create(
-    {
-      userId: new UniqueEntityID(),
-      address: {
-        street: faker.location.street(),
-        number: faker.location.buildingNumber(),
-        neighborhood: faker.person.firstName(),
-        // Using firstName as a placeholder for neighborhood
-        // since faker doesn't have a specific method for neighborhoods
-        city: faker.location.city(),
-        postalCode: faker.location.zipCode(),
-        state: faker.location.state(),
-      },
-      ...override,
-    },
-    id
-  );
+  const recipient = RecipientWithPassword.create({
+    name: faker.person.firstName(),
+    cpf: faker.number.int({ min: 10000000000, max: 99999999999 }).toString(),
+    id: id ?? new UniqueEntityID(),
+    password: faker.internet.password(),
+    ...override,
+  });
 
   return recipient;
 }
