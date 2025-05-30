@@ -2,7 +2,8 @@ import { Entity } from "@/core/entities/entity";
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 import { UserType } from "./value-objects/userType";
 
-type RoleType = "admin" | "recipient" | "deliveryman" | "common";
+type RoleType = "admin" | "recipient" | "deliveryman";
+
 
 export interface UserProps {
   name: string;
