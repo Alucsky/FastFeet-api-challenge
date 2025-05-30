@@ -2,7 +2,7 @@ import { FakeEncrypter } from "test/cryptography/fake-encrypter";
 import { FakeHasher } from "test/cryptography/fake-hasher";
 import { InMemoryUsersRepository } from "test/repositories/in-memory-users-repository";
 import { AuthenticateUserUseCase } from "./authenticate-user";
-import { makeUser } from "test/factories/make-user";
+import { User } from "../../enterprise/entities/user";
 
 let inMemoryUsersRepository: InMemoryUsersRepository;
 let fakeHasher: FakeHasher;
@@ -24,9 +24,14 @@ describe("Authenticate user", () => {
   });
 
   it("should be able to authenticate a user", async () => {
-    const user = makeUser({
+    const hashedPassword = await fakeHasher.hash("123456");
+
+    const user = User.create({
+      name: "John Doe",
       cpf: "12345678900",
-      password: await fakeHasher.hash("123456"),
+      password: hashedPassword,
+      role: "admin",
+      userType: "admin",
     });
 
     inMemoryUsersRepository.items.push(user);

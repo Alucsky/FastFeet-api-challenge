@@ -1,16 +1,14 @@
 import { Entity } from "@/core/entities/entity";
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
-import { UserType } from "./value-objects/userType";
 
-type RoleType = "admin" | "recipient" | "deliveryman";
-
+type UserType = "admin" | "recipient" | "deliveryman";
 
 export interface UserProps {
   name: string;
   cpf: string;
   password: string;
   userType: UserType;
-  role: RoleType;
+  role: UserType;
 }
 export class User extends Entity<UserProps> {
   constructor(props: UserProps, id?: UniqueEntityID) {
@@ -20,7 +18,7 @@ export class User extends Entity<UserProps> {
   get role() {
     return this.props.role;
   }
-  set role(role: RoleType) {
+  set role(role: UserType) {
     this.props.role = role;
   }
 
